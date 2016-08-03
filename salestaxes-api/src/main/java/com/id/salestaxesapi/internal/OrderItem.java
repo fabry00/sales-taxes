@@ -26,7 +26,7 @@ public class OrderItem implements IOrderItem {
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     @Override
     public IItem getItem() {
@@ -34,18 +34,16 @@ public class OrderItem implements IOrderItem {
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     @Override
     public int getQuantity() {
         return this.quantity;
     }
 
-    /**
-     * An Order item is identified by Item <-> quantity
+   /**
      *
-     * @param o
-     * @return
+     * {@inheritDoc}
      */
     @Override
     public boolean equals(Object o) {
@@ -60,9 +58,22 @@ public class OrderItem implements IOrderItem {
                 && Objects.equals(quantity, other.quantity);
     }
 
+    /**
+     *
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         return Objects.hash(item, quantity);
+    }
+
+    /**
+     *
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        return this.item.toString() + " [" + this.quantity + "]";
     }
 
     public static class Builder {
@@ -77,11 +88,6 @@ public class OrderItem implements IOrderItem {
         public Builder withQuantity(int quantity) {
             this.quantity = quantity;
             return this;
-        }
-
-        @Override
-        public String toString() {
-            return this.item.toString() + " [" + this.quantity + "]";
         }
 
         public IOrderItem build() {

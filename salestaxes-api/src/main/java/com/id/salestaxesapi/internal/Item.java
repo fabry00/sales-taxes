@@ -26,7 +26,7 @@ public class Item implements IItem {
     }
 
     /**
-     * @inheritDoc
+     * {@inheritDoc}
      */
     @Override
     public String getName() {
