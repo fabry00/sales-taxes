@@ -1,5 +1,6 @@
 package com.id.salestaxesapi.internal;
 
+import com.id.salestaxesapi.TestHelper;
 import com.id.salestaxesapi.api.IItem;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -15,11 +16,16 @@ import static org.junit.Assert.*;
  */
 public class ItemTest {
 
+    private static IItem baseItem;
+    private static TestHelper helper;
+    
     public ItemTest() {
     }
 
     @BeforeClass
     public static void setUpClass() {
+        helper = new TestHelper();
+        baseItem = helper.getBaseItem();
     }
 
     @AfterClass
@@ -47,4 +53,21 @@ public class ItemTest {
         assertEquals(expResult, result);
     }
     
+    @Test
+    public void testEquals() {
+        System.out.println("Equals");
+        IItem secondItem = helper.getBaseItem();
+        assertEquals(baseItem, secondItem);
+        assertEquals(baseItem.hashCode(), secondItem.hashCode());
+        
+    }
+    
+    @Test
+    public void testNotEquals() {
+        System.out.println("NotEquals");
+        IItem secondItem =  new Item.Builder("item2").build();
+        assertNotEquals(baseItem, secondItem);
+        assertNotEquals(baseItem.hashCode(), secondItem.hashCode());
+    }
+
 }

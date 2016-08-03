@@ -41,10 +41,34 @@ public class OrderItem implements IOrderItem {
         return this.quantity;
     }
 
+    /**
+     * An Order item is identified by Item <-> quantity
+     *
+     * @param o
+     * @return
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final OrderItem other = (OrderItem) o;
+        return Objects.equals(item, other.item)
+                && Objects.equals(quantity, other.quantity);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(item, quantity);
+    }
+
     public static class Builder {
 
         private final IItem item;
-        private int quantity;
+        private int quantity = 1;
 
         public Builder(IItem item) {
             this.item = item;
@@ -58,29 +82,6 @@ public class OrderItem implements IOrderItem {
         @Override
         public String toString() {
             return this.item.toString() + " [" + this.quantity + "]";
-        }
-
-        /**
-         * An Order item is identified by Item <-> quantity
-         * @param o
-         * @return 
-         */
-        @Override
-        public boolean equals(Object o) {
-            if (this == o) {
-                return true;
-            }
-            if (o == null || getClass() != o.getClass()) {
-                return false;
-            }
-            final OrderItem other = (OrderItem) o;
-            return Objects.equals(item, other.item)
-                    && Objects.equals(quantity, other.quantity);
-        }
-
-        @Override
-        public int hashCode() {
-            return Objects.hash(item, quantity);
         }
 
         public IOrderItem build() {
