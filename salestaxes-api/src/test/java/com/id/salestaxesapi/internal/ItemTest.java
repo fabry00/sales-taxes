@@ -46,5 +46,5 @@ public class ItemTest {
         String result = instance.getName();
         assertEquals(expResult, result);
     }
-
+    
 }

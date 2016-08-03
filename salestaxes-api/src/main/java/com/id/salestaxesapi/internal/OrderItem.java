@@ -2,20 +2,35 @@ package com.id.salestaxesapi.internal;
 
 import com.id.salestaxesapi.api.IItem;
 import com.id.salestaxesapi.api.IOrderItem;
+import java.util.Objects;
 
 /**
- * The order Item implementation
+ * The order Item implementation Immutable
  *
  * @author Fabrizio Faustinoni
  */
 public class OrderItem implements IOrderItem {
+
+    private final IItem item;
+    private final int quantity;
+
+    /**
+     * OrderItem constructore
+     *
+     * @param item The Item
+     * @param quantity The quantity
+     */
+    private OrderItem(IItem item, int quantity) {
+        this.item = item;
+        this.quantity = quantity;
+    }
 
     /**
      * @inheritDoc
      */
     @Override
     public IItem getItem() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.item;
     }
 
     /**
@@ -23,7 +38,55 @@ public class OrderItem implements IOrderItem {
      */
     @Override
     public int getQuantity() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.quantity;
+    }
+
+    public static class Builder {
+
+        private final IItem item;
+        private int quantity;
+
+        public Builder(IItem item) {
+            this.item = item;
+        }
+
+        public Builder withQuantity(int quantity) {
+            this.quantity = quantity;
+            return this;
+        }
+
+        @Override
+        public String toString() {
+            return this.item.toString() + " [" + this.quantity + "]";
+        }
+
+        /**
+         * An Order item is identified by Item <-> quantity
+         * @param o
+         * @return 
+         */
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) {
+                return true;
+            }
+            if (o == null || getClass() != o.getClass()) {
+                return false;
+            }
+            final OrderItem other = (OrderItem) o;
+            return Objects.equals(item, other.item)
+                    && Objects.equals(quantity, other.quantity);
+        }
+
+        @Override
+        public int hashCode() {
+            return Objects.hash(item, quantity);
+        }
+
+        public IOrderItem build() {
+            IOrderItem orederItem = new OrderItem(this.item, this.quantity);
+            return orederItem;
+        }
     }
 
 }
