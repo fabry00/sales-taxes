@@ -79,7 +79,8 @@ public class OrderItemTest {
     @Test
     public void testNotEquals() {
         System.out.println("NotEquals");
-        IItem secondItem = new Item.Builder("item2").build();
+        IItem secondItem = new Item.Builder("item2", Category.OTHER,
+                helper.getBasePrice()).build();
         IOrderItem secondOrderItem = new OrderItem.Builder(secondItem).build();
         assertNotEquals(baseOrderItem, secondOrderItem);
         assertNotEquals(baseOrderItem.hashCode(), secondOrderItem.hashCode());
@@ -88,7 +89,8 @@ public class OrderItemTest {
     @Test
     public void testNotEquals2() {
         System.out.println("NotEquals2");
-        IItem item = new Item.Builder(TestHelper.ITEM_NAME).build();
+        IItem item = new Item.Builder(TestHelper.ITEM_NAME, Category.OTHER,
+                helper.getBasePrice()).build();
 
         IOrderItem firstOrderItem = new OrderItem.Builder(item)
                 .withQuantity(2)

@@ -41,7 +41,7 @@ public class OrderItem implements IOrderItem {
         return this.quantity;
     }
 
-   /**
+    /**
      *
      * {@inheritDoc}
      */
