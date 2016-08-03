@@ -5,6 +5,7 @@ import com.id.salestaxesapi.api.IOrder;
 import com.id.salestaxesapi.api.IOrderItem;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
@@ -114,4 +115,33 @@ public class Order implements IOrder {
         return builder.toString();
     }
 
+    public static class Builder {
+
+        private final int id;
+        private final ICustomer customer;
+        private final Set<IOrderItem> goods = new HashSet<>();
+        private Date date = new Date();
+
+        public Builder(int id, ICustomer customer) {
+            this.id = id;
+            this.customer = customer;
+        }
+
+        public Builder withDate(Date date) {
+            this.date = date;
+            return this;
+        }
+
+        public Builder addItem(IOrderItem item) {
+            this.goods.add(item);
+            return this;
+        }
+
+        public IOrder build() {
+            IOrder order = new Order(this.id, this.goods,
+                    this.date, this.customer);
+
+            return order;
+        }
+    }
 }
