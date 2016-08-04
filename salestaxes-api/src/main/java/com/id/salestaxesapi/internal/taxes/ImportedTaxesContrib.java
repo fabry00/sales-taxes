@@ -13,7 +13,7 @@ public class ImportedTaxesContrib implements ITaxesContributor {
 
     @Override
      public int getItemTaxes(IItem item) {
-        if (!item.isTaxesFree()) {
+        if (item.isImported()) {
             return TAXES;
         }
 

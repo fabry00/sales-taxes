@@ -13,6 +13,7 @@ import com.id.salestaxesapi.impl.Item;
 import com.id.salestaxesapi.impl.Order;
 import com.id.salestaxesapi.impl.OrderItem;
 import com.id.salestaxesapi.impl.Price;
+import java.math.BigDecimal;
 
 /**
  * Helper test
@@ -62,6 +63,8 @@ public class TestHelper {
     public IPrice getBasePrice() {
         ICurrency currency
                 = new Currency.Builder(ICurrency.SupportedCurrency.EUR, 1).build();
-        return new Price.Builder(15.5).currency(currency).build();
+
+        return new Price.Builder(BigDecimal.valueOf(15.5))
+                .currency(currency).build();
     }
 }
