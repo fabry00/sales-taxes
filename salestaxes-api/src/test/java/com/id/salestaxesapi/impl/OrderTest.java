@@ -3,8 +3,7 @@ package com.id.salestaxesapi.impl;
 import com.id.salestaxesapi.TestHelper;
 import com.id.salestaxesapi.api.IItem;
 import com.id.salestaxesapi.api.IOrder;
-import com.id.salestaxesapi.api.IOrderItem;
-import java.util.Set;
+import java.util.Map;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -18,31 +17,29 @@ import static org.junit.Assert.*;
  * @author Fabrizio Faustinoni
  */
 public class OrderTest {
-    
+
     private static IOrder baseOrder;
-    private static IOrderItem baseOrderItem;
     private static IItem baseItem;
     private static TestHelper helper;
-    
+
     public OrderTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
         helper = new TestHelper();
-        baseOrderItem = helper.getBaseOrderItem();
         baseItem = helper.getBaseItem();
         baseOrder = helper.getBaseOrder();
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -53,8 +50,8 @@ public class OrderTest {
     @Test
     public void testGetGoods() {
         System.out.println("getGoods");
-        Set<IOrderItem> expResult = helper.getBaseOrder().getGoods();
-        Set<IOrderItem> result = baseOrder.getGoods();
+        Map<IItem, Integer> expResult = helper.getBaseOrder().getGoods();
+        Map<IItem, Integer> result = baseOrder.getGoods();
         assertEquals(expResult, result);
     }
 
@@ -64,7 +61,7 @@ public class OrderTest {
     @Test
     public void testGetGoods2() {
         System.out.println("getGoods2");
-        assertTrue(baseOrder.getGoods().contains(baseOrderItem));
+        assertTrue(baseOrder.getGoods().containsKey(baseItem));
     }
 
     /**
@@ -76,5 +73,5 @@ public class OrderTest {
         assertEquals(baseOrder, helper.getBaseOrder());
         assertEquals(baseOrder.hashCode(), helper.getBaseOrder().hashCode());
     }
-    
+
 }

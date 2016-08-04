@@ -1,7 +1,7 @@
 package com.id.salestaxesapi.api;
 
 import java.util.Date;
-import java.util.Set;
+import java.util.Map;
 
 /**
  * Order Interface
@@ -10,9 +10,9 @@ import java.util.Set;
 public interface IOrder {
     
     /**
-     * @return the list of items of the order
+     * @return the Map<Item,quantity> of items of the order
      */
-    public Set<IOrderItem> getGoods();
+    public Map<IItem, Integer> getGoods();
     
     /**
      * @return the id of the order

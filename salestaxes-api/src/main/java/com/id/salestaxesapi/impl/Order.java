@@ -1,13 +1,13 @@
 package com.id.salestaxesapi.impl;
 
 import com.id.salestaxesapi.api.ICustomer;
+import com.id.salestaxesapi.api.IItem;
 import com.id.salestaxesapi.api.IOrder;
-import com.id.salestaxesapi.api.IOrderItem;
 import java.util.Collections;
 import java.util.Date;
-import java.util.HashSet;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
-import java.util.Set;
 
 /**
  * The IOrder implementation
@@ -17,7 +17,7 @@ import java.util.Set;
 public class Order implements IOrder {
 
     private final int id;
-    private final Set<IOrderItem> goods;
+    private final Map<IItem, Integer> goods;
     private final ICustomer customer;
     private final Date date;
 
@@ -31,7 +31,7 @@ public class Order implements IOrder {
      */
     private Order(Builder builder) {
         this.id = builder.id;
-        this.goods = Collections.unmodifiableSet(builder.goods);
+        this.goods = Collections.unmodifiableMap(builder.goods);
         this.customer = builder.customer;
         this.date = builder.date;
     }
@@ -41,7 +41,7 @@ public class Order implements IOrder {
      * {@inheritDoc}
      */
     @Override
-    public Set<IOrderItem> getGoods() {
+    public Map<IItem, Integer> getGoods() {
         return this.goods;
     }
 
@@ -107,9 +107,14 @@ public class Order implements IOrder {
         StringBuilder builder = new StringBuilder();
 
         builder.append("OrderID: ").append(id).append(lineSep);
+        builder.append("Date: ").append(date.toString()).append(lineSep);
+        builder.append("Customer: ").append(customer.getName()).append(lineSep);
 
-        goods.stream().forEach((item) -> {
-            builder.append(item.toString()).append(lineSep);
+        goods.entrySet().stream().forEach((entry) -> {
+            builder.append(entry.getKey().toString())
+                    .append(" - ")
+                    .append(entry.getValue())
+                    .append(lineSep);
         });
 
         return builder.toString();
@@ -119,7 +124,7 @@ public class Order implements IOrder {
 
         private final int id;
         private final ICustomer customer;
-        private final Set<IOrderItem> goods = new HashSet<>();
+        private final Map<IItem, Integer> goods = new HashMap<>();
         private Date date = new Date();
 
         public Builder(int id, ICustomer customer) {
@@ -132,8 +137,18 @@ public class Order implements IOrder {
             return this;
         }
 
-        public Builder addItem(IOrderItem item) {
-            this.goods.add(item);
+        public Builder addItem(IItem item, int quantity) {
+
+            if (quantity < 1) {
+                throw new IllegalStateException("quantity out of range");
+            }
+
+            this.goods.put(item, quantity);
+            return this;
+        }
+
+        public Builder addItem(IItem item) {
+            this.goods.put(item, 1);
             return this;
         }
 

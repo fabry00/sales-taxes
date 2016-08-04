@@ -9,7 +9,12 @@ public interface IReceiptItem {
     /**
      * @return The ordered item
      */
-    public IOrderItem getOrderItem();
+    public IItem getOrderItem();
+    
+    /**
+     * @return The numbr ordered item
+     */
+    public int getQuantity();
     
     /**
      * the TOTAL final price is calculated in this way:
@@ -28,7 +33,6 @@ public interface IReceiptItem {
      * @return The amount of the taxes applied for the single item
      */
     public double getTaxesAmount();
-    
     
     /**
      * @return The total amount of the taxes applied (item taxes * quantity)

@@ -1,41 +1,110 @@
 package com.id.salestaxesapi.impl;
 
-import com.id.salestaxesapi.api.IOrderItem;
+import com.id.salestaxesapi.api.IItem;
 import com.id.salestaxesapi.api.IPrice;
 import com.id.salestaxesapi.api.IReceiptItem;
+import java.math.BigDecimal;
 
 /**
  * Receipt Item implementation
+ *
  * @author Fabrizio Faustinoni
  */
-public class ReceiptItem implements IReceiptItem{
-    
-    public ReceiptItem() {
+public class ReceiptItem implements IReceiptItem {
+
+    private final IItem item;
+    private final double taxesAmount;
+    private final int quantity;
+
+    private ReceiptItem(Builder builder) {
+        this.item = builder.item;
+        this.taxesAmount = builder.taxesAmount;
+        this.quantity = builder.quantity;
     }
 
     @Override
-    public IOrderItem getOrderItem() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public IItem getOrderItem() {
+        return this.item;
+    }
+
+    @Override
+    public int getQuantity() {
+        return this.quantity;
     }
 
     @Override
     public IPrice getTotalFinalPrice() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+
+        // Calculate the final price (ItemFinalPrice + quantity)
+        IPrice finalPriceSingle = getItemFinalPrice();
+
+        BigDecimal nOfItems = BigDecimal.valueOf(quantity);
+        BigDecimal total
+                = finalPriceSingle.getValue().multiply(nOfItems);
+
+        return new Price.Builder(total)
+                .currency(item.getPrice().getCurrency())
+                .build();
     }
 
     @Override
     public IPrice getItemFinalPrice() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        IPrice itemPrice = item.getPrice();
+
+        // Calculate the final price (price + taxesAmount)
+        BigDecimal finalPrice
+                = itemPrice.getValue().add(BigDecimal.valueOf(taxesAmount));
+
+        return new Price.Builder(finalPrice)
+                .currency(itemPrice.getCurrency())
+                .build();
     }
 
     @Override
     public double getTaxesAmount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return taxesAmount;
     }
 
     @Override
     public double getTotalTaxesAmount() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return quantity * taxesAmount;
     }
-    
+
+    public static class Builder {
+
+        private final IItem item;
+        private double taxesAmount = 0;
+        private int quantity = 1;
+
+        public Builder(IItem item) {
+            this.item = item;
+        }
+
+        public Builder quantity(int quantity) {
+            this.quantity = quantity;
+            return this;
+        }
+
+        public Builder withTaxes(int taxesAmount) {
+            this.taxesAmount = taxesAmount;
+            return this;
+        }
+
+        public IReceiptItem build() {
+
+            IReceiptItem receiptItem = new ReceiptItem(this);
+            if (receiptItem.getQuantity() < 1) {
+                // thread-safe
+                throw new IllegalStateException("Quantity out of range");
+            }
+
+            if (receiptItem.getTaxesAmount() < 0) {
+                // thread-safe
+                throw new IllegalStateException("TaxesAmount out of range");
+            }
+
+            return receiptItem;
+        }
+    }
+
 }
