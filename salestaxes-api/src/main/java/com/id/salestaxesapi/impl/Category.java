@@ -1,4 +1,4 @@
-package com.id.salestaxesapi.internal;
+package com.id.salestaxesapi.impl;
 
 /**
  * The Category Enum

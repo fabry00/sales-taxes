@@ -1,5 +1,6 @@
-package com.id.salestaxesapi.api;
+package com.id.salestaxesapi.impl;
 
+import com.id.salestaxesapi.api.ICustomer;
 import com.id.salestaxesapi.api.ICustomer;
 import java.util.Objects;
 
@@ -12,13 +13,14 @@ public class Customer implements ICustomer {
 
     private final String name;
 
-    public Customer(String name) {
-        this.name = name;
+    private Customer(Builder build) {
+        this.name = build.name;
     }
 
     /**
      * {@inheritDoc}
      */
+    @Override
     public String getName() {
         return this.name;
     }
@@ -55,5 +57,25 @@ public class Customer implements ICustomer {
     @Override
     public String toString() {
         return this.name;
+    }
+
+    public static class Builder {
+
+        private final String name;
+
+        public Builder(String name) {
+            this.name = name;
+        }
+
+        public ICustomer build() {
+            ICustomer customer = new Customer(this);
+
+            if (customer.getName().isEmpty()) {
+                // thread-safe
+                throw new IllegalStateException("Name not valid");
+            }
+
+            return customer;
+        }
     }
 }

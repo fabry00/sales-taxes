@@ -6,4 +6,9 @@ package com.id.salestaxesapi.api;
  */
 public interface ICustomer {
     
+    /**
+     * @return The name of the Customer
+     */
+    public String getName();
+    
 }
