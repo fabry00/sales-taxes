@@ -1,6 +1,7 @@
 package com.id.salestaxesapi;
 
 import com.id.salestaxesapi.api.IItem;
+import com.id.salestaxesapi.api.IOrder;
 import com.id.salestaxesapi.impl.Category;
 
 /**
@@ -73,6 +74,10 @@ public class TestCases {
     public IItem input3_Element4() {
         return helper.getItemImported("box of imported chocolates", Category.FOOD,
                 11.25);
+    }
+    
+    public IOrder input1() {
+        return helper.getOrder(input1_Element1(),input1_Element2(),input1_Element3());
     }
 
 }

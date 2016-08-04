@@ -82,4 +82,14 @@ public class TestHelper {
         return new ReceiptItem.Builder(item).build();
 
     }
+
+    public IOrder getOrder(IItem... items) {
+        ICustomer customer = new Customer.Builder("Mario Rossi").build();
+        Order.Builder builder = new Order.Builder(0, customer);
+        for (IItem item : items) {
+            builder.addItem(item);
+        }
+
+        return builder.build();
+    }
 }
