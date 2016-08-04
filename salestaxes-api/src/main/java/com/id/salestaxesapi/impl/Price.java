@@ -6,21 +6,22 @@ import java.math.BigDecimal;
 
 /**
  * The price implementation
- * 
- * Representing money as a double or float will probably look good at first as 
- * the software rounds off the tiny errors, but as you perform more additions, 
- * subtractions, multiplications and divisions on inexact numbers, you'll lose 
- * more and more precision as the errors add up. This makes floats and doubles 
- * inadequate for dealing with money, where perfect accuracy for multiples of 
+ *
+ * Representing money as a double or float will probably look good at first as
+ * the software rounds off the tiny errors, but as you perform more additions,
+ * subtractions, multiplications and divisions on inexact numbers, you'll lose
+ * more and more precision as the errors add up. This makes floats and doubles
+ * inadequate for dealing with money, where perfect accuracy for multiples of
  * base 10 powers is required.
- * 
+ *
  * we could use org.javamoney or Joda Money
+ *
  * @author Fabrizio Faustinoni
  */
 public class Price implements IPrice {
 
     private final ICurrency currency;
-    
+
     private final BigDecimal value;
 
     public Price(Builder builder) {
@@ -36,6 +37,23 @@ public class Price implements IPrice {
     @Override
     public BigDecimal getValue() {
         return this.value;
+    }
+
+    /**
+     *
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(this.value.doubleValue())
+                .append(" - ")
+                .append(this.currency.getCode())
+                .append("[")
+                .append(this.currency.getRate())
+                .append("]");
+
+        return builder.toString();
     }
 
     public static class Builder {

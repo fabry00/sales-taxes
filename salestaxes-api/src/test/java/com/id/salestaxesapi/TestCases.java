@@ -55,29 +55,39 @@ public class TestCases {
         return helper.getItemImported("imported bottle of perfume", Category.OTHER,
                 47.50);
     }
-    
+
     public IItem input3_Element1() {
         return helper.getItemImported("imported bottle of perfume", Category.OTHER,
                 27.99);
     }
-    
+
     public IItem input3_Element2() {
         return helper.getItem("bottle of perfume", Category.OTHER,
                 18.99);
     }
-    
+
     public IItem input3_Element3() {
         return helper.getItem("packet of headache pills", Category.MEDICAL,
                 9.75);
     }
-    
+
     public IItem input3_Element4() {
         return helper.getItemImported("box of imported chocolates", Category.FOOD,
                 11.25);
     }
-    
+
     public IOrder input1() {
-        return helper.getOrder(input1_Element1(),input1_Element2(),input1_Element3());
+        return helper.getOrder(input1_Element1(), input1_Element2(),
+                input1_Element3());
+    }
+
+    public IOrder input2() {
+        return helper.getOrder(input2_Element1(), input2_Element2());
+    }
+
+    public IOrder input3() {
+        return helper.getOrder(input3_Element1(), input3_Element2(),
+                input3_Element3(), input3_Element4());
     }
 
 }

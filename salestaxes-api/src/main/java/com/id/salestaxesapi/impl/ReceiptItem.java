@@ -4,6 +4,7 @@ import com.id.salestaxesapi.api.IItem;
 import com.id.salestaxesapi.api.IPrice;
 import com.id.salestaxesapi.api.IReceiptItem;
 import java.math.BigDecimal;
+import java.util.Objects;
 
 /**
  * Receipt Item implementation
@@ -70,6 +71,47 @@ public class ReceiptItem implements IReceiptItem {
         return quantity * taxesAmount;
     }
 
+    /**
+     *
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) {
+            return true;
+        }
+        if (o == null || getClass() != o.getClass()) {
+            return false;
+        }
+        final ReceiptItem other = (ReceiptItem) o;
+        return Objects.equals(item, other.item);
+    }
+
+    /**
+     *
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        return Objects.hash(item);
+    }
+
+    /**
+     *
+     * {@inheritDoc}
+     */
+    @Override
+    public String toString() {
+        StringBuilder builder = new StringBuilder();
+        builder.append(this.item.toString())
+                .append(" - N: ")
+                .append(this.quantity)
+                .append(" - Taxes: ")
+                .append(this.taxesAmount);
+
+        return builder.toString();
+    }
+
     public static class Builder {
 
         private final IItem item;
@@ -85,7 +127,7 @@ public class ReceiptItem implements IReceiptItem {
             return this;
         }
 
-        public Builder withTaxes(int taxesAmount) {
+        public Builder withTaxes(double taxesAmount) {
             this.taxesAmount = taxesAmount;
             return this;
         }

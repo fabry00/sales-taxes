@@ -1,7 +1,6 @@
 package com.id.salestaxesapi.impl;
 
 import com.id.salestaxesapi.api.ICustomer;
-import com.id.salestaxesapi.api.ICustomer;
 import java.util.Objects;
 
 /**
