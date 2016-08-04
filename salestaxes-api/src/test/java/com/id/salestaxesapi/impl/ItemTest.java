@@ -1,5 +1,7 @@
-package com.id.salestaxesapi.internal;
+package com.id.salestaxesapi.impl;
 
+import com.id.salestaxesapi.impl.Item;
+import com.id.salestaxesapi.impl.Category;
 import com.id.salestaxesapi.TestHelper;
 import com.id.salestaxesapi.api.IItem;
 import org.junit.After;

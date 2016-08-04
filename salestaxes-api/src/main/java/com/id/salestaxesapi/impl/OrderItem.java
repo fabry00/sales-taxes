@@ -1,7 +1,8 @@
-package com.id.salestaxesapi.internal;
+package com.id.salestaxesapi.impl;
 
 import com.id.salestaxesapi.api.IItem;
 import com.id.salestaxesapi.api.IOrderItem;
+import com.id.salestaxesapi.api.IPrice;
 import java.util.Objects;
 
 /**
@@ -13,6 +14,9 @@ public class OrderItem implements IOrderItem {
 
     private final IItem item;
     private final int quantity;
+    
+    private int taxes;
+    private IPrice finalPrice;
 
     /**
      * OrderItem constructore
@@ -20,9 +24,9 @@ public class OrderItem implements IOrderItem {
      * @param item The Item
      * @param quantity The quantity
      */
-    private OrderItem(IItem item, int quantity) {
-        this.item = item;
-        this.quantity = quantity;
+    private OrderItem(Builder builder) {
+        this.item = builder.item;
+        this.quantity = builder.quantity;
     }
 
     /**
@@ -40,7 +44,8 @@ public class OrderItem implements IOrderItem {
     public int getQuantity() {
         return this.quantity;
     }
-
+    
+    
     /**
      *
      * {@inheritDoc}
@@ -85,13 +90,19 @@ public class OrderItem implements IOrderItem {
             this.item = item;
         }
 
-        public Builder withQuantity(int quantity) {
+        public Builder quantity(int quantity) {
             this.quantity = quantity;
             return this;
         }
 
         public IOrderItem build() {
-            IOrderItem orederItem = new OrderItem(this.item, this.quantity);
+            IOrderItem orederItem = new OrderItem(this);
+            
+            if(orederItem.getQuantity() <= 0) {
+                // thread-safe
+                throw new IllegalStateException("quantity out of range");
+            }
+            
             return orederItem;
         }
     }

@@ -1,11 +1,9 @@
-package com.id.salestaxesapi.internal;
+package com.id.salestaxesapi.impl;
 
 import com.id.salestaxesapi.TestHelper;
-import com.id.salestaxesapi.api.ICustomer;
 import com.id.salestaxesapi.api.IItem;
 import com.id.salestaxesapi.api.IOrder;
 import com.id.salestaxesapi.api.IOrderItem;
-import java.util.Date;
 import java.util.Set;
 import org.junit.After;
 import org.junit.AfterClass;

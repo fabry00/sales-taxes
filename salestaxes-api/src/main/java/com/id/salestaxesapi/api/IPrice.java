@@ -1,5 +1,7 @@
 package com.id.salestaxesapi.api;
 
+import com.id.salestaxesapi.impl.Currency;
+
 /**
  * The interface for the price of the item
  *
@@ -10,8 +12,12 @@ public interface IPrice {
     /**
      * @return the currency of the price
      */
-    public Currency getCurrency();
+    public ICurrency getCurrency();
 
+    /**
+     * The value
+     * @return 
+     */
     public double getValue();
 
 }

@@ -1,5 +1,8 @@
-package com.id.salestaxesapi.internal;
+package com.id.salestaxesapi.impl;
 
+import com.id.salestaxesapi.impl.Item;
+import com.id.salestaxesapi.impl.Category;
+import com.id.salestaxesapi.impl.OrderItem;
 import com.id.salestaxesapi.TestHelper;
 import com.id.salestaxesapi.api.IItem;
 import com.id.salestaxesapi.api.IOrderItem;
@@ -93,11 +96,11 @@ public class OrderItemTest {
                 helper.getBasePrice()).build();
 
         IOrderItem firstOrderItem = new OrderItem.Builder(item)
-                .withQuantity(2)
+                .quantity(2)
                 .build();
 
         IOrderItem secondOrderItem = new OrderItem.Builder(item)
-                .withQuantity(3)
+                .quantity(3)
                 .build();
 
         assertNotEquals(firstOrderItem, secondOrderItem);

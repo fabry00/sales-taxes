@@ -1,4 +1,4 @@
-package com.id.salestaxesapi.internal;
+package com.id.salestaxesapi.impl;
 
 import com.id.salestaxesapi.api.IItem;
 import com.id.salestaxesapi.api.IPrice;
@@ -17,16 +17,18 @@ public class Item implements IItem {
     private final String name;
     private final Category category;
     private final IPrice price;
+    private final boolean imported;
 
     /**
      * Constructor
      *
      * @param name
      */
-    private Item(String name, Category category, IPrice price) {
-        this.name = name;
-        this.category = category;
-        this.price = price;
+    private Item(Builder builder) {
+        this.name = builder.name;
+        this.category = builder.category;
+        this.price = builder.price;
+        this.imported = builder.imported;
     }
 
     /**
@@ -49,8 +51,24 @@ public class Item implements IItem {
      * {@inheritDoc}
      */
     @Override
+    public IPrice getPrice() {
+        return this.price;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
     public boolean isTaxesFree() {
         return this.category.isTaxesFree();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean isImported() {
+        return this.imported;
     }
 
     /**
@@ -84,24 +102,32 @@ public class Item implements IItem {
         return Objects.hash(name);
     }
 
-    /**
-     * With the current implementation it is not necessary to have a builder But
-     * if in the feauture we will add some optional fields, we are ready
-     */
     public static class Builder {
 
         private final String name;
         private final Category category;
         private final IPrice price;
+        private boolean imported;
 
         public Builder(String name, Category category, IPrice price) {
             this.name = name;
             this.category = category;
+            this.imported = false;
             this.price = price;
         }
 
+        public Builder imported() {
+            this.imported = true;
+            return this;
+        }
+
         public IItem build() {
-            IItem item = new Item(this.name, this.category, this.price);
+            IItem item = new Item(this);
+            
+            if (item.getName().isEmpty()) {
+                // thread-safe
+                throw new IllegalStateException("Name not valid");
+            }
             return item;
         }
     }

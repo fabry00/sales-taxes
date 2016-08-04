@@ -1,6 +1,6 @@
 package com.id.salestaxesapi.api;
 
-import com.id.salestaxesapi.internal.Category;
+import com.id.salestaxesapi.impl.Category;
 
 /**
  * Item interface
@@ -18,9 +18,21 @@ public interface IItem {
      * @return the item category
      */
     public Category getCategory();
+    
+    /**
+     * @return the base price of the Item
+     */
+    public IPrice getPrice();
 
     /**
      * @return true if the item is without taxes
      */
     public boolean isTaxesFree();
+    
+    /**
+     * @return true if the item has been imported
+     */
+    public boolean isImported();
+    
+    
 }

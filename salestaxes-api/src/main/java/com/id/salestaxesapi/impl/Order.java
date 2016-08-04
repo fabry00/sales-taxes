@@ -1,4 +1,4 @@
-package com.id.salestaxesapi.internal;
+package com.id.salestaxesapi.impl;
 
 import com.id.salestaxesapi.api.ICustomer;
 import com.id.salestaxesapi.api.IOrder;
@@ -29,11 +29,11 @@ public class Order implements IOrder {
      * @param date The date
      * @param customer The customer
      */
-    private Order(int id, Set<IOrderItem> goods, Date date, ICustomer customer) {
-        this.id = id;
-        this.goods = Collections.unmodifiableSet(goods);
-        this.customer = customer;
-        this.date = date;
+    private Order(Builder builder) {
+        this.id = builder.id;
+        this.goods = Collections.unmodifiableSet(builder.goods);
+        this.customer = builder.customer;
+        this.date = builder.date;
     }
 
     /**
@@ -127,7 +127,7 @@ public class Order implements IOrder {
             this.customer = customer;
         }
 
-        public Builder withDate(Date date) {
+        public Builder date(Date date) {
             this.date = date;
             return this;
         }
@@ -138,9 +138,17 @@ public class Order implements IOrder {
         }
 
         public IOrder build() {
-            IOrder order = new Order(this.id, this.goods,
-                    this.date, this.customer);
+            IOrder order = new Order(this);
 
+            if (order.getId() < 0) {
+                // thread-safe
+                throw new IllegalStateException("ID out of range");
+            }
+
+            if (order.getGoods().isEmpty()) {
+                // thread-safe
+                throw new IllegalStateException("Goods length out of range");
+            }
             return order;
         }
     }
