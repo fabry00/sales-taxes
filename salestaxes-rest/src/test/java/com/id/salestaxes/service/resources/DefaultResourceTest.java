@@ -1,5 +1,6 @@
 package com.id.salestaxes.service.resources;
 
+import com.id.salestaxes.service.ServiceConfiguration;
 import com.id.salestaxes.service.api.IServiceInfo;
 import com.id.salestaxes.service.api.ServiceInfo;
 import io.dropwizard.testing.junit.ResourceTestRule;
@@ -8,15 +9,13 @@ import javax.ws.rs.client.Invocation;
 import javax.ws.rs.client.WebTarget;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import static junit.framework.Assert.assertEquals;
 import org.junit.Rule;
 import org.junit.Test;
-import static junit.framework.Assert.assertEquals;
-import com.id.salestaxes.service.ServiceConfiguration;
-import com.id.salestaxes.service.resources.DefaultResource;
 
 /**
  *
- * @author fabry
+ * @author Fabrizio Faustinoni
  */
 public class DefaultResourceTest {
 

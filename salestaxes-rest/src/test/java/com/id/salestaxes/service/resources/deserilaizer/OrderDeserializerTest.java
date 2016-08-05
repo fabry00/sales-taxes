@@ -4,6 +4,7 @@ import com.fasterxml.jackson.core.JsonParser;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.SerializationFeature;
+import com.id.salestaxes.service.helper.TestHelper;
 import com.id.salestaxesapi.api.IOrder;
 import java.io.IOException;
 import java.text.DateFormat;
@@ -25,17 +26,13 @@ import org.junit.Test;
  */
 public class OrderDeserializerTest {
 
-    private final static String DATE_FORMAT = "yyyy-MM-dd hh:mm:ss";
-    private static final String FILE_ORDER_1 = "json/order1.json";
-    private static final String FILE_ORDER_2 = "json/order2.json";
-    private static final String FILE_ORDER_3 = "json/order3.json";
+    private final OrderDeserializer deserializer = new OrderDeserializer();
+
     private static String order1;
     private static String order2;
     private static String order3;
-
-    private final OrderDeserializer deserializer = new OrderDeserializer();
-
-    protected ObjectMapper mapper;
+    private static TestHelper helper;
+    private ObjectMapper mapper;
 
     public OrderDeserializerTest() {
 
@@ -43,9 +40,10 @@ public class OrderDeserializerTest {
 
     @BeforeClass
     public static void setUpClass() {
-        order1 = getFile(FILE_ORDER_1);
-        order2 = getFile(FILE_ORDER_2);
-        order3 = getFile(FILE_ORDER_3);
+        helper = new TestHelper();
+        order1 = helper.getFile(TestHelper.FILE_ORDER_1);
+        order2 = helper.getFile(TestHelper.FILE_ORDER_2);
+        order3 = helper.getFile(TestHelper.FILE_ORDER_3);
     }
 
     @AfterClass
@@ -71,7 +69,7 @@ public class OrderDeserializerTest {
     public void testDeserialize() throws Exception {
         int expId = 515461;
         String expName = "Mario rossi";
-        Date expDate = getDate("2016-08-04 15:28:36");
+        Date expDate = helper.getDate("2016-08-04 15:28:36");
         int expNOfGoods = 3;
         JsonParser parser = mapper.getFactory().createParser(order1);
         DeserializationContext ctxt = mapper.getDeserializationContext();
@@ -85,7 +83,7 @@ public class OrderDeserializerTest {
 
         // FIXME --> test all goods values
     }
-    
+
     /**
      * Test of deserialize method, of class OrderDeserializer.
      *
@@ -95,7 +93,7 @@ public class OrderDeserializerTest {
     public void testDeserialize2() throws Exception {
         int expId = 515461;
         String expName = "Mario rossi";
-        Date expDate = getDate("2016-08-04 15:28:36");
+        Date expDate = helper.getDate("2016-08-04 15:28:36");
         int expNOfGoods = 2;
         JsonParser parser = mapper.getFactory().createParser(order2);
         DeserializationContext ctxt = mapper.getDeserializationContext();
@@ -109,7 +107,7 @@ public class OrderDeserializerTest {
 
         // FIXME --> test all goods values
     }
-    
+
     /**
      * Test of deserialize method, of class OrderDeserializer.
      *
@@ -119,7 +117,7 @@ public class OrderDeserializerTest {
     public void testDeserialize3() throws Exception {
         int expId = 515461;
         String expName = "Mario rossi";
-        Date expDate = getDate("2016-08-04 15:28:36");
+        Date expDate = helper.getDate("2016-08-04 15:28:36");
         int expNOfGoods = 4;
         JsonParser parser = mapper.getFactory().createParser(order3);
         DeserializationContext ctxt = mapper.getDeserializationContext();
@@ -133,25 +131,4 @@ public class OrderDeserializerTest {
 
         // FIXME --> test all goods values
     }
-
-    private static String getFile(String fileName) {
-
-        String result = "";
-
-        ClassLoader classLoader = OrderDeserializer.class.getClassLoader();
-        try {
-            result = IOUtils.toString(classLoader.getResourceAsStream(fileName));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return result;
-
-    }
-
-    private Date getDate(String date) throws ParseException {
-        DateFormat format = new SimpleDateFormat(DATE_FORMAT);
-        return format.parse(date);
-    }
-
 }

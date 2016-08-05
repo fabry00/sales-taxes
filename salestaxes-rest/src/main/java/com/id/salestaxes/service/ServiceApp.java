@@ -39,7 +39,7 @@ public class ServiceApp extends Application<ServiceConfiguration> {
         environment.healthChecks().register(ServiceConfiguration.SERVICE_NAME,
                 getHealthCheck(configuration, environment));
         environment.jersey().register(getDefault());
-        environment.jersey().register(getPurchaseResource(configuration));
+        environment.jersey().register(getPurchaseResource());
 
     }
 
@@ -52,9 +52,9 @@ public class ServiceApp extends Application<ServiceConfiguration> {
         return defaultRes;
     }
 
-    private Object getPurchaseResource(final ServiceConfiguration configuration) {
+    private Object getPurchaseResource() {
         SalesTaxesFactory factory = new SalesTaxesFactory();
-        PurchaseResource resource = new PurchaseResource(configuration, factory.create());
+        PurchaseResource resource = new PurchaseResource(factory.create());
         return resource;
     }
 
