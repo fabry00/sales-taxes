@@ -2,4 +2,4 @@ language: java
 jdk:
   - oraclejdk8
   
-script: cd salestaxes-api && mvn test && cd ../salestaxes-rest && mvn test
+script: cd salestaxes-api && mvn install && cd ../salestaxes-rest && mvn test
