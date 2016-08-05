@@ -1,6 +1,5 @@
 package com.id.salestaxesapi.api.impl;
 
-import com.id.salestaxesapi.api.impl.SalesTaxesAPI;
 import com.id.salestaxesapi.TestCases;
 import com.id.salestaxesapi.api.IOrder;
 import com.id.salestaxesapi.api.IReceipt;
@@ -49,32 +48,48 @@ public class SalesTaxesAPITest {
      */
     @Test
     public void testPurchase() {
-        System.out.println("purchase");
         IOrder order = testCases.input1();
         SalesTaxesAPI instance = new SalesTaxesAPI(calculator);
         double expResult = TestCases.TOTAL_TAXES_INPUT1;
         IReceipt result = instance.purchase(order);
+
+        printTest(1, order, result);
+
         assertEquals(expResult, result.getSalesTaxes(), 0);
     }
-    
+
     @Test
     public void testPurchase2() {
-        System.out.println("purchase2");
         IOrder order = testCases.input2();
         SalesTaxesAPI instance = new SalesTaxesAPI(calculator);
         double expResult = TestCases.TOTAL_TAXES_INPUT2;
         IReceipt result = instance.purchase(order);
+        printTest(2, order, result);
         assertEquals(expResult, result.getSalesTaxes(), 0);
     }
-    
+
     @Test
     public void testPurchase3() {
-        System.out.println("purchase3");
         IOrder order = testCases.input3();
         SalesTaxesAPI instance = new SalesTaxesAPI(calculator);
         double expResult = TestCases.TOTAL_TAXES_INPUT3;
         IReceipt result = instance.purchase(order);
+        printTest(3, order, result);
         assertEquals(expResult, result.getSalesTaxes(), 0);
+    }
+
+    private void printTest(int id, IOrder order, IReceipt result) {
+        String lineSep = System.getProperty("line.separator");
+        StringBuilder builder = new StringBuilder();
+        builder.append("######################################").append(lineSep);
+        builder.append("Inuput: ").append(id).append(lineSep)
+                .append(order.toString()).append(lineSep)
+                .append("Receipt:").append(lineSep)
+                .append(result.toString());
+        builder.append("######################################")
+                .append(lineSep)
+                .append(lineSep);
+        System.out.println(builder.toString());
     }
 
 }

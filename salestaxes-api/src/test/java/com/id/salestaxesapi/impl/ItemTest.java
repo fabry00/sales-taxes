@@ -1,7 +1,5 @@
 package com.id.salestaxesapi.impl;
 
-import com.id.salestaxesapi.impl.Item;
-import com.id.salestaxesapi.impl.Category;
 import com.id.salestaxesapi.TestHelper;
 import com.id.salestaxesapi.api.IItem;
 import org.junit.After;
@@ -47,7 +45,6 @@ public class ItemTest {
      */
     @Test
     public void testGetName() {
-        System.out.println("getName");
         String name = "My ITEM";
         IItem instance = new Item.Builder(name, Category.OTHER,
                 helper.getBasePrice()).build();
@@ -81,7 +78,6 @@ public class ItemTest {
 
     @Test
     public void testEquals() {
-        System.out.println("Equals");
         IItem secondItem = helper.getBaseItem();
         assertEquals(baseItem, secondItem);
         assertEquals(baseItem.hashCode(), secondItem.hashCode());
@@ -90,7 +86,6 @@ public class ItemTest {
 
     @Test
     public void testNotEquals() {
-        System.out.println("NotEquals");
         IItem secondItem = new Item.Builder("item2", Category.OTHER,
                 helper.getBasePrice()).build();
         assertNotEquals(baseItem, secondItem);

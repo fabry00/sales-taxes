@@ -47,8 +47,6 @@ public class TaxesCalculatorTest {
 
     @Test
     public void testGetItemTaxes() {
-        System.out.println("getItemTaxes");
-
         // Input1 - music CD
         IItem item = testCases.input1_Element2();
         int expResult = GeneralTaxesContrb.TAXES;
@@ -58,8 +56,6 @@ public class TaxesCalculatorTest {
 
     @Test
     public void testGetItemTaxes2() {
-        System.out.println("getItemTaxes2");
-
         // input2 -- imported bottle of perfume
         IItem item = testCases.input2_Element2();
         int expResult = GeneralTaxesContrb.TAXES + ImportedTaxesContrib.TAXES;
@@ -69,8 +65,6 @@ public class TaxesCalculatorTest {
 
     @Test
     public void testGetItemTaxes3() {
-        System.out.println("getItemTaxes3");
-
         // input1 - book
         IItem item = testCases.input1_Element1();
 
@@ -81,8 +75,6 @@ public class TaxesCalculatorTest {
 
     @Test
     public void testGetItemTaxes4() {
-        System.out.println("getItemTaxes4");
-
         // input2 - imported box of chocolates
         IItem item = testCases.input2_Element1();
 
@@ -93,8 +85,6 @@ public class TaxesCalculatorTest {
 
     @Test
     public void testCalculateTaxes() {
-        System.out.println("calculateTaxes");
-
         // input1
         //book
         IItem item = testCases.input1_Element1();
@@ -109,8 +99,6 @@ public class TaxesCalculatorTest {
 
     @Test
     public void testCalculateTaxes2() {
-        System.out.println("calculateTaxes2");
-
         // input1
         //music
         IItem item = testCases.input1_Element2();
@@ -125,8 +113,6 @@ public class TaxesCalculatorTest {
 
     @Test
     public void testCalculateTaxes4() {
-        System.out.println("calculateTaxes4");
-
         // input2
         //imported box of chocolates
         IItem item = testCases.input2_Element1();
@@ -141,8 +127,6 @@ public class TaxesCalculatorTest {
 
     @Test
     public void testCalculateTaxes5() {
-        System.out.println("calculateTaxes5");
-
         // input2
         //imported bottle of perfume
         IItem item = testCases.input2_Element2();
@@ -157,8 +141,6 @@ public class TaxesCalculatorTest {
 
     @Test
     public void testCalculateTaxes6() {
-        System.out.println("calculateTaxes6");
-
         // input3
         //imported bottle of perfume
         IItem item = testCases.input3_Element1();
@@ -174,8 +156,6 @@ public class TaxesCalculatorTest {
 
     @Test
     public void testCalculateTaxes7() {
-        System.out.println("calculateTaxes7");
-
         // input3
         //bottle of perfume
         IItem item = testCases.input3_Element2();
@@ -190,8 +170,6 @@ public class TaxesCalculatorTest {
 
     @Test
     public void testCalculateTaxes8() {
-        System.out.println("calculateTaxes8");
-
         // input3
         //box of imported chocolates
          IItem item = testCases.input3_Element4();

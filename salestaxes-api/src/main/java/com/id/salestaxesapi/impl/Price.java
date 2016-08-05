@@ -24,7 +24,7 @@ public class Price implements IPrice {
 
     private final BigDecimal value;
 
-    public Price(Builder builder) {
+    private Price(Builder builder) {
         this.currency = builder.currency;
         this.value = builder.value;
     }

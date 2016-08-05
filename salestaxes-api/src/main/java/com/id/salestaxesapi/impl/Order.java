@@ -3,6 +3,8 @@ package com.id.salestaxesapi.impl;
 import com.id.salestaxesapi.api.ICustomer;
 import com.id.salestaxesapi.api.IItem;
 import com.id.salestaxesapi.api.IOrder;
+import com.id.salestaxesapi.tool.Utils;
+import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
@@ -105,15 +107,17 @@ public class Order implements IOrder {
     public String toString() {
         String lineSep = System.getProperty("line.separator");
         StringBuilder builder = new StringBuilder();
-
+        
+        Utils utils = new Utils();
         builder.append("OrderID: ").append(id).append(lineSep);
-        builder.append("Date: ").append(date.toString()).append(lineSep);
+        builder.append("Date: ").append(utils.dateToString(date)).append(lineSep);
         builder.append("Customer: ").append(customer.getName()).append(lineSep);
 
         goods.entrySet().stream().forEach((entry) -> {
-            builder.append(entry.getKey().toString())
-                    .append(" - ")
-                    .append(entry.getValue())
+            builder.append(entry.getValue()).append(" ")
+                    .append(entry.getKey().toString())
+                    .append(" at ")
+                    .append(entry.getKey().getPrice().getValue())                    
                     .append(lineSep);
         });
 
@@ -157,7 +161,7 @@ public class Order implements IOrder {
 
             if (order.getId() < 0) {
                 // thread-safe
-                throw new IllegalStateException("ID out of range");
+                throw new IllegalStateException("ID out of range "+order.getId());
             }
 
             if (order.getGoods().isEmpty()) {

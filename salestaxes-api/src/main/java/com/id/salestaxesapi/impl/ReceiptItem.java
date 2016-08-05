@@ -103,12 +103,10 @@ public class ReceiptItem implements IReceiptItem {
     @Override
     public String toString() {
         StringBuilder builder = new StringBuilder();
-        builder.append(this.item.toString())
-                .append(" - N: ")
-                .append(this.quantity)
-                .append(" - Taxes: ")
-                .append(this.taxesAmount);
-
+        builder.append(this.quantity).append(" ")
+                .append(this.item.toString())
+                .append(" at ")
+                .append(getTotalFinalPrice());
         return builder.toString();
     }
 

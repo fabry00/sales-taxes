@@ -15,6 +15,7 @@ import com.id.salestaxesapi.impl.Price;
 import com.id.salestaxesapi.impl.ReceiptItem;
 import com.id.salestaxesapi.impl.taxes.TaxesCalculator;
 import java.math.BigDecimal;
+import java.util.Random;
 
 /**
  * Helper test
@@ -85,7 +86,9 @@ public class TestHelper {
 
     public IOrder getOrder(IItem... items) {
         ICustomer customer = new Customer.Builder("Mario Rossi").build();
-        Order.Builder builder = new Order.Builder(0, customer);
+        Random rnd = new Random();
+        int id = Math.abs(rnd.nextInt());
+        Order.Builder builder = new Order.Builder(id, customer);
         for (IItem item : items) {
             builder.addItem(item);
         }

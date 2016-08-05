@@ -1,6 +1,7 @@
 package com.id.salestaxesapi.impl;
 
 import com.id.salestaxesapi.api.ICustomer;
+import com.id.salestaxesapi.api.IPrice;
 import com.id.salestaxesapi.api.IReceipt;
 import com.id.salestaxesapi.api.IReceiptItem;
 import java.util.Collections;
@@ -21,6 +22,7 @@ public class Receipt implements IReceipt {
     private final ICustomer customer;
     private final Set<IReceiptItem> goods;
     private final double salesTaxes;
+    private final IPrice total;
 
     private Receipt(Builder builder) {
         this.id = builder.id;
@@ -28,11 +30,17 @@ public class Receipt implements IReceipt {
         this.customer = builder.customer;
         this.goods = Collections.unmodifiableSet(builder.goods);
         this.salesTaxes = builder.salesTaxes;
+        this.total = builder.total;
     }
 
     @Override
     public double getSalesTaxes() {
         return salesTaxes;
+    }
+
+    @Override
+    public IPrice getTotal() {
+        return total;
     }
 
     @Override
@@ -89,14 +97,18 @@ public class Receipt implements IReceipt {
         String lineSep = System.getProperty("line.separator");
         StringBuilder builder = new StringBuilder();
 
-        builder.append("OrderID: ").append(id).append(lineSep);
-        builder.append("Date: ").append(date.toString()).append(lineSep);
-        builder.append("Customer: ").append(customer.getName()).append(lineSep);
-
         goods.stream().forEach((item) -> {
             builder.append(item.toString())
                     .append(lineSep);
         });
+        builder.append(lineSep)
+                .append("------").append(lineSep)
+                .append("Sales Taxes: ")
+                .append(salesTaxes)
+                .append(lineSep)
+                .append("Total:")
+                .append(total)
+                .append(lineSep);
         return builder.toString();
     }
 
@@ -107,6 +119,7 @@ public class Receipt implements IReceipt {
         private Date date;
         private ICustomer customer;
         private double salesTaxes = 0;
+        private IPrice total;
 
         public Builder(int id) {
 
@@ -133,6 +146,11 @@ public class Receipt implements IReceipt {
             return this;
         }
 
+        public Builder toatal(IPrice total) {
+            this.total = total;
+            return this;
+        }
+
         public IReceipt build() {
             IReceipt receipt = new Receipt(this);
 
@@ -144,6 +162,11 @@ public class Receipt implements IReceipt {
             if (receipt.getID() < 0) {
                 // thread-safe
                 throw new IllegalStateException("index out of range");
+            }
+
+            if (receipt.getTotal().getValue().doubleValue() < 0) {
+                // thread-safe
+                throw new IllegalStateException("Total out of range");
             }
 
             if (receipt.getCustomerName().isEmpty()) {

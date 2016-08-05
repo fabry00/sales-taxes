@@ -49,7 +49,6 @@ public class OrderTest {
      */
     @Test
     public void testGetGoods() {
-        System.out.println("getGoods");
         Map<IItem, Integer> expResult = helper.getBaseOrder().getGoods();
         Map<IItem, Integer> result = baseOrder.getGoods();
         assertEquals(expResult, result);
@@ -60,7 +59,6 @@ public class OrderTest {
      */
     @Test
     public void testGetGoods2() {
-        System.out.println("getGoods2");
         assertTrue(baseOrder.getGoods().containsKey(baseItem));
     }
 
@@ -69,7 +67,6 @@ public class OrderTest {
      */
     @Test
     public void testEquals() {
-        System.out.println("equals");
         assertEquals(baseOrder, helper.getBaseOrder());
         assertEquals(baseOrder.hashCode(), helper.getBaseOrder().hashCode());
     }

@@ -36,4 +36,10 @@ public interface IReceipt {
      * @return The order date
      */
     public Date getDate();
+    
+    
+    /**
+     * @return The total price
+     */
+    public IPrice getTotal();
 }

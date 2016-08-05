@@ -6,8 +6,10 @@ import com.id.salestaxesapi.api.IReceipt;
 import com.id.salestaxesapi.api.IReceiptItem;
 import com.id.salestaxesapi.api.ISalesTaxesAPI;
 import com.id.salestaxesapi.api.ITaxesCalculator;
+import com.id.salestaxesapi.impl.Price;
 import com.id.salestaxesapi.impl.Receipt;
 import com.id.salestaxesapi.impl.ReceiptItem;
+import java.math.BigDecimal;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
@@ -30,6 +32,7 @@ public class SalesTaxesAPI implements ISalesTaxesAPI {
                 .date(order.getOrderDate());
 
         final AtomicReference<Double> salesTaxes = new AtomicReference<>(0.0);
+        final AtomicReference<BigDecimal> total = new AtomicReference<>(BigDecimal.ZERO);
 
         // Since the item is immutable (only add operation) 
         // we can perform a parallel taxes calculation
@@ -37,11 +40,23 @@ public class SalesTaxesAPI implements ISalesTaxesAPI {
             IReceiptItem item = getReceiptItem(entry.getKey(), entry.getValue());
             builder.item(item);
 
-            // Atomically update salesTaxed
+            // Atomically update salesTaxed and total
             salesTaxes.updateAndGet(n -> n + item.getTotalTaxesAmount());
+            total.updateAndGet(n -> n.add(item.getTotalFinalPrice().getValue()));
         });
 
         builder.salesTaxes(Math.round(salesTaxes.get() * 100.0) / 100.0);
+
+        // Build the total Price
+        Price.Builder priceBuilder = new Price.Builder(total.get());
+        if (!order.getGoods().entrySet().isEmpty()) {
+            // Set the Currency as the currency of the first element
+            // We suppose that all the element have the same Currency
+            IItem firstItem = order.getGoods().entrySet().iterator().next().getKey();
+            priceBuilder.currency(firstItem.getPrice().getCurrency());
+        }
+
+        builder.toatal(priceBuilder.build());
         return builder.build();
     }
 
