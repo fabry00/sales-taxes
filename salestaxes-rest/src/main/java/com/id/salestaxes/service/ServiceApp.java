@@ -3,7 +3,7 @@ package com.id.salestaxes.service;
 import com.id.salestaxes.service.resources.PurchaseResource;
 import com.id.salestaxes.service.resources.DefaultResource;
 import com.id.salestaxes.service.health.HealthCheckTask;
-import com.id.salestaxes.service.resources.deserilaizer.PurchaseModule;
+import com.id.salestaxes.service.resources.PurchaseModule;
 import com.id.salestaxesapi.api.impl.SalesTaxesFactory;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;

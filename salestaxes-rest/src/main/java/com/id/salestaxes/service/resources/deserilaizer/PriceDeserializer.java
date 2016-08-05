@@ -15,9 +15,10 @@ import java.math.BigDecimal;
 public class PriceDeserializer {
 
     public IPrice deserialize(JsonNode node) {
-        Long value = node.get("value").asLong();
+        String value = node.get("value").asText();
+        Double dbl = Double.parseDouble(value);
 
-        Price.Builder builder = new Price.Builder(BigDecimal.valueOf(value));
+        Price.Builder builder = new Price.Builder(BigDecimal.valueOf(dbl));
         getCurrency(builder, node);
         return builder.build();
     }

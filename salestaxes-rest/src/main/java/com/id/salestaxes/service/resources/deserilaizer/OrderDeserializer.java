@@ -5,6 +5,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.id.salestaxes.service.resources.helper.ResourceHelper;
 import com.id.salestaxesapi.api.ICustomer;
 import com.id.salestaxesapi.api.IItem;
 import com.id.salestaxesapi.api.IOrder;
@@ -24,8 +25,6 @@ import org.slf4j.LoggerFactory;
  * @author Fabrizio Faustinoni
  */
 public class OrderDeserializer extends JsonDeserializer<IOrder> {
-
-    private final static String DATE_FORMAT = "yyyy-MM-dd hh:mm:ss";
 
     private final Logger log = LoggerFactory.getLogger(OrderDeserializer.class);
 
@@ -54,8 +53,8 @@ public class OrderDeserializer extends JsonDeserializer<IOrder> {
 
     private Date getDate(JsonNode node) throws ParseException {
         String date = node.get("date").asText();
-        DateFormat format = new SimpleDateFormat(DATE_FORMAT);
-        return format.parse(date);
+        ResourceHelper helper = new ResourceHelper();
+        return helper.stringToDate(date);
     }
 
     private void getGoods(Order.Builder builder, JsonNode node) {

@@ -7,7 +7,9 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import com.id.salestaxes.service.api.IServiceApi;
 import com.id.salestaxes.service.resources.deserilaizer.OrderDeserializer;
+import com.id.salestaxes.service.resources.deserilaizer.OrderDeserializer;
 import com.id.salestaxesapi.api.IOrder;
+import com.id.salestaxesapi.api.IReceipt;
 import com.id.salestaxesapi.api.ISalesTaxesAPI;
 import javax.ws.rs.Consumes;
 import org.jose4j.json.internal.json_simple.JSONObject;
@@ -54,14 +56,12 @@ public class PurchaseResource {
     @Timed
     @Path("/" + PURCHASE_URL)
     @JsonDeserialize(using = OrderDeserializer.class)
-    public JSONObject purchase(IOrder order) {
+    public IReceipt purchase(IOrder order) {
 
-        JSONObject jo = new JSONObject();
-        JSONObject data = new JSONObject();
-
-        jo.put("data", data);
-        log.info("Return " + jo);
-        return jo;
+        log.info("purchase: " + order.toString());
+        IReceipt receipt = this.salesTaxesAPI.purchase(order);
+        log.info("receipt: " + receipt.toString());
+        return receipt;
 
     }
 }

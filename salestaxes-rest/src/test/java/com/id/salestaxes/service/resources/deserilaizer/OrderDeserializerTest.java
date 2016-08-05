@@ -86,7 +86,7 @@ public class OrderDeserializerTest {
      */
     @Test
     public void testDeserialize2() throws Exception {
-       /* int expId = 515461;
+        int expId = 515461;
         String expName = "Mario rossi";
         Date expDate = helper.getDate("2016-08-04 15:28:36");
         int expNOfGoods = 2;
@@ -99,7 +99,7 @@ public class OrderDeserializerTest {
         assertEquals(expName, order.getCustomer().getName());
         assertEquals(expDate, order.getOrderDate());
         assertEquals(expNOfGoods, order.getGoods().size());
-*/
+
         // FIXME --> test all goods values
     }
 
@@ -110,7 +110,7 @@ public class OrderDeserializerTest {
      */
     @Test
     public void testDeserialize3() throws Exception {
-      /*  int expId = 515461;
+        int expId = 515461;
         String expName = "Mario rossi";
         Date expDate = helper.getDate("2016-08-04 15:28:36");
         int expNOfGoods = 4;
@@ -123,7 +123,7 @@ public class OrderDeserializerTest {
         assertEquals(expName, order.getCustomer().getName());
         assertEquals(expDate, order.getOrderDate());
         assertEquals(expNOfGoods, order.getGoods().size());
-*/
+
         // FIXME --> test all goods values
     }
 }
