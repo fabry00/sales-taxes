@@ -12,3 +12,4 @@
 hs_err_pid*
 /salestaxes-api/target/
 /salestaxes-rest/nbproject/
+/salestaxes-rest/simple_db.salesdb

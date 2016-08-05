@@ -9,6 +9,8 @@ import com.id.salestaxesapi.api.ITaxesCalculator;
 import com.id.salestaxesapi.obj.Price;
 import com.id.salestaxesapi.obj.Receipt;
 import com.id.salestaxesapi.obj.ReceiptItem;
+import com.id.salestaxesapi.obj.persistent.IPersistentEngine;
+import com.id.salestaxesapi.obj.persistent.ReciptDAO;
 import java.math.BigDecimal;
 import java.util.concurrent.atomic.AtomicReference;
 
@@ -20,9 +22,11 @@ import java.util.concurrent.atomic.AtomicReference;
 public class SalesTaxesAPI implements ISalesTaxesAPI {
 
     private final ITaxesCalculator calculator;
+    private final IPersistentEngine engine;
 
-    public SalesTaxesAPI(ITaxesCalculator calcultor) {
+    public SalesTaxesAPI(ITaxesCalculator calcultor, IPersistentEngine engine) {
         this.calculator = calcultor;
+        this.engine = engine;
     }
 
     @Override
@@ -57,7 +61,29 @@ public class SalesTaxesAPI implements ISalesTaxesAPI {
         }
 
         builder.toatal(priceBuilder.build());
-        return builder.build();
+        IReceipt receipt = builder.build();
+
+        persisteReicpit(receipt);
+
+        return receipt;
+    }
+
+    /**
+     * Return all the orders stored. 
+     * WARNING: this is a very very simple and
+     * dummy functionality added just to complete the design.
+     *
+     * @return all the orders in string format
+     */
+    @Override
+    public String getOrders() {
+        if (engine != null) {
+            // Only if there is a valid engine
+            // This shuld be an interface
+            ReciptDAO dao = new ReciptDAO(engine);
+            return dao.findAll();
+        }
+        return "";
     }
 
     private IReceiptItem getReceiptItem(IItem item, Integer nOfItems) {
@@ -73,6 +99,22 @@ public class SalesTaxesAPI implements ISalesTaxesAPI {
                 = calculator.calculateTaxesAmount(item.getPrice(), taxesPercent);
 
         return taxes;
+    }
+
+    /**
+     * Persiste the Reeipt
+     *
+     * This part could be improved!!!!
+     *
+     * @param receipt
+     */
+    private void persisteReicpit(IReceipt receipt) {
+        if (engine != null) {
+            // Persiste only if there is a valid engine
+            // This shuld be an interface
+            ReciptDAO dao = new ReciptDAO(engine);
+            dao.insertRecipt(receipt);
+        }
     }
 
 }

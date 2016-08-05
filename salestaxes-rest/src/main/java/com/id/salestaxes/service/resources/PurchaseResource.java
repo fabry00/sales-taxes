@@ -7,7 +7,6 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import com.id.salestaxes.service.api.IServiceApi;
 import com.id.salestaxes.service.resources.deserilaizer.OrderDeserializer;
-import com.id.salestaxes.service.resources.deserilaizer.OrderDeserializer;
 import com.id.salestaxesapi.api.IOrder;
 import com.id.salestaxesapi.api.IReceipt;
 import com.id.salestaxesapi.api.ISalesTaxesAPI;
@@ -44,10 +43,7 @@ public class PurchaseResource {
     public JSONObject getOrders() {
 
         JSONObject jo = new JSONObject();
-        JSONObject data = new JSONObject();
-
-        jo.put("data", data);
-        log.info("Return " + jo);
+        jo.put("data", this.salesTaxesAPI.getOrders());
         return jo;
 
     }

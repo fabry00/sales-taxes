@@ -8,6 +8,7 @@ import com.id.salestaxesapi.api.impl.SalesTaxesFactory;
 import io.dropwizard.Application;
 import io.dropwizard.setup.Bootstrap;
 import io.dropwizard.setup.Environment;
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.util.EnumSet;
 import javax.servlet.DispatcherType;
@@ -32,7 +33,7 @@ public class ServiceApp extends Application<ServiceConfiguration> {
 
     @Override
     public void run(final ServiceConfiguration configuration,
-            final Environment environment) throws URISyntaxException {
+            final Environment environment) throws URISyntaxException, IOException {
 
         enableCors(environment);
 
@@ -52,7 +53,7 @@ public class ServiceApp extends Application<ServiceConfiguration> {
         return defaultRes;
     }
 
-    private Object getPurchaseResource() {
+    private Object getPurchaseResource() throws IOException {
         SalesTaxesFactory factory = new SalesTaxesFactory();
         PurchaseResource resource = new PurchaseResource(factory.create());
         return resource;
