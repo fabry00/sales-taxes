@@ -1,0 +1,2 @@
+#!/bin/bash
+curl -H "Content-Type: application/json" -X POST -d '{"id":"515461","data": "2016-08-04 15:28:36", "customer":{ "name" : "Mario rossi"}, "goods": [] }' http://localhost:9082/api/v1/salestaxes/purchase

@@ -6,9 +6,9 @@ import com.id.salestaxesapi.api.IReceipt;
 import com.id.salestaxesapi.api.IReceiptItem;
 import com.id.salestaxesapi.api.ISalesTaxesAPI;
 import com.id.salestaxesapi.api.ITaxesCalculator;
-import com.id.salestaxesapi.impl.Price;
-import com.id.salestaxesapi.impl.Receipt;
-import com.id.salestaxesapi.impl.ReceiptItem;
+import com.id.salestaxesapi.obj.Price;
+import com.id.salestaxesapi.obj.Receipt;
+import com.id.salestaxesapi.obj.ReceiptItem;
 import java.math.BigDecimal;
 import java.util.concurrent.atomic.AtomicReference;
 

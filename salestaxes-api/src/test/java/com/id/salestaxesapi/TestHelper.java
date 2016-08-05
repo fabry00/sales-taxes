@@ -1,19 +1,19 @@
 package com.id.salestaxesapi;
 
 import com.id.salestaxesapi.api.ICurrency;
-import com.id.salestaxesapi.impl.Currency;
+import com.id.salestaxesapi.obj.Currency;
 import com.id.salestaxesapi.api.ICustomer;
 import com.id.salestaxesapi.api.IItem;
 import com.id.salestaxesapi.api.IOrder;
-import com.id.salestaxesapi.impl.Customer;
+import com.id.salestaxesapi.obj.Customer;
 import com.id.salestaxesapi.api.IPrice;
 import com.id.salestaxesapi.api.IReceiptItem;
-import com.id.salestaxesapi.impl.Category;
-import com.id.salestaxesapi.impl.Item;
-import com.id.salestaxesapi.impl.Order;
-import com.id.salestaxesapi.impl.Price;
-import com.id.salestaxesapi.impl.ReceiptItem;
-import com.id.salestaxesapi.impl.taxes.TaxesCalculator;
+import com.id.salestaxesapi.obj.Category;
+import com.id.salestaxesapi.obj.Item;
+import com.id.salestaxesapi.obj.Order;
+import com.id.salestaxesapi.obj.Price;
+import com.id.salestaxesapi.obj.ReceiptItem;
+import com.id.salestaxesapi.obj.taxes.TaxesCalculator;
 import java.math.BigDecimal;
 import java.util.Random;
 

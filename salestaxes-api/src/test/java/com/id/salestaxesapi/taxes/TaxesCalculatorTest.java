@@ -1,12 +1,12 @@
 package com.id.salestaxesapi.taxes;
 
 import com.id.salestaxesapi.TestCases;
-import com.id.salestaxesapi.impl.taxes.TaxesCalculator;
+import com.id.salestaxesapi.obj.taxes.TaxesCalculator;
 import com.id.salestaxesapi.api.IItem;
 import com.id.salestaxesapi.api.IPrice;
-import com.id.salestaxesapi.impl.Price;
-import com.id.salestaxesapi.impl.taxes.contributors.GeneralTaxesContrb;
-import com.id.salestaxesapi.impl.taxes.contributors.ImportedTaxesContrib;
+import com.id.salestaxesapi.obj.Price;
+import com.id.salestaxesapi.obj.taxes.contributors.GeneralTaxesContrb;
+import com.id.salestaxesapi.obj.taxes.contributors.ImportedTaxesContrib;
 import java.math.BigDecimal;
 import org.junit.After;
 import org.junit.AfterClass;

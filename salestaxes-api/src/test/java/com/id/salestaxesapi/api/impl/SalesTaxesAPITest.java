@@ -4,7 +4,7 @@ import com.id.salestaxesapi.TestCases;
 import com.id.salestaxesapi.api.IOrder;
 import com.id.salestaxesapi.api.IReceipt;
 import com.id.salestaxesapi.api.ITaxesCalculator;
-import com.id.salestaxesapi.impl.taxes.TaxesCalculator;
+import com.id.salestaxesapi.obj.taxes.TaxesCalculator;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;

@@ -1,4 +1,4 @@
-package com.id.salestaxesapi.impl;
+package com.id.salestaxesapi.obj;
 
 import com.id.salestaxesapi.api.ICurrency;
 import com.id.salestaxesapi.api.IPrice;

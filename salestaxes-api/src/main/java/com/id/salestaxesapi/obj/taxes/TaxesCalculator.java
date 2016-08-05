@@ -1,11 +1,11 @@
-package com.id.salestaxesapi.impl.taxes;
+package com.id.salestaxesapi.obj.taxes;
 
 import com.id.salestaxesapi.api.IItem;
 import com.id.salestaxesapi.api.IPrice;
 import com.id.salestaxesapi.api.ITaxesCalculator;
-import com.id.salestaxesapi.impl.taxes.contributors.GeneralTaxesContrb;
-import com.id.salestaxesapi.impl.taxes.contributors.ITaxesContributor;
-import com.id.salestaxesapi.impl.taxes.contributors.ImportedTaxesContrib;
+import com.id.salestaxesapi.obj.taxes.contributors.GeneralTaxesContrb;
+import com.id.salestaxesapi.obj.taxes.contributors.ITaxesContributor;
+import com.id.salestaxesapi.obj.taxes.contributors.ImportedTaxesContrib;
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.HashSet;

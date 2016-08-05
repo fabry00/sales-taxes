@@ -2,7 +2,7 @@ package com.id.salestaxesapi.api.impl;
 
 import com.id.salestaxesapi.api.ISalesTaxesAPI;
 import com.id.salestaxesapi.api.ITaxesCalculator;
-import com.id.salestaxesapi.impl.taxes.TaxesCalculator;
+import com.id.salestaxesapi.obj.taxes.TaxesCalculator;
 
 /**
  * SalesTaxes Factory

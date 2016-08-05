@@ -2,7 +2,7 @@ package com.id.salestaxesapi;
 
 import com.id.salestaxesapi.api.IItem;
 import com.id.salestaxesapi.api.IOrder;
-import com.id.salestaxesapi.impl.Category;
+import com.id.salestaxesapi.obj.Category;
 
 /**
  *

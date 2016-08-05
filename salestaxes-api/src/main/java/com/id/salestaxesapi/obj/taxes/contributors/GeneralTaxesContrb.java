@@ -1,4 +1,4 @@
-package com.id.salestaxesapi.impl.taxes.contributors;
+package com.id.salestaxesapi.obj.taxes.contributors;
 
 import com.id.salestaxesapi.api.IItem;
 

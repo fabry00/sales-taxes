@@ -1,6 +1,6 @@
 package com.id.salestaxesapi.api;
 
-import com.id.salestaxesapi.impl.Category;
+import com.id.salestaxesapi.obj.Category;
 
 /**
  * Item interface

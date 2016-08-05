@@ -1,4 +1,4 @@
-package com.id.salestaxesapi.impl;
+package com.id.salestaxesapi.obj;
 
 import com.id.salestaxesapi.TestHelper;
 import com.id.salestaxesapi.api.IItem;
