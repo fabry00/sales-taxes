@@ -1,8 +1,33 @@
 {
-	"id": "515461",
-	"data": "2016-08-04 15:28:36",
-	"customer": {
-		"name": "Mario rossi"
-	},
-	"goods": []
+    "id": "515461",
+    "date": "2016-08-04 15:28:36",
+    "customer": {
+        "name": "Mario rossi"
+    },
+    "goods": [
+        {
+            "name": "book",
+            "category": "FOOD",
+            "imported": false,
+            "price": {
+                "value": 12.49
+            }
+        },
+        {
+            "name": "music",
+            "category": "DIGITAL",
+            "imported": false,
+            "price": {
+                "value": 12.49
+            }
+        },
+        {
+            "name": "chocolate bar",
+            "category": "FOOD",
+            "imported": false,
+            "price": {
+                "value": 0.85
+            }
+        }
+    ]
 }

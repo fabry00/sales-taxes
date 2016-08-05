@@ -1,4 +1,4 @@
-package com.id.salestaxesapi.taxes;
+package com.id.salestaxesapi.obj.taxes;
 
 import com.id.salestaxesapi.TestCases;
 import com.id.salestaxesapi.obj.taxes.TaxesCalculator;
