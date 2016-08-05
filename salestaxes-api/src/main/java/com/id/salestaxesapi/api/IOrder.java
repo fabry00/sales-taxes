@@ -10,7 +10,7 @@ import java.util.Map;
 public interface IOrder {
     
     /**
-     * @return the Map<Item,quantity> of items of the order
+     * @return the Map[Item,quantity] of items of the order
      */
     public Map<IItem, Integer> getGoods();
     

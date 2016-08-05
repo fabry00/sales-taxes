@@ -1,6 +1,5 @@
 package com.id.salestaxesapi.api;
 
-import com.id.salestaxesapi.impl.Currency;
 import java.math.BigDecimal;
 
 /**
@@ -16,8 +15,7 @@ public interface IPrice {
     public ICurrency getCurrency();
 
     /**
-     * The value
-     * @return 
+     * @return The value
      */
     public BigDecimal getValue();
 
