@@ -15,15 +15,15 @@ public interface IReceiptDAO {
     /**
      * insert a Receipt
      *
-     * @param receipt
-     * @throws com.id.salestaxesapi.obj.persistent.InsertElementException
+     * @param receipt The receipt
+     * @throws InsertElementException The exception
      */
     public void insertReceipt(IReceipt receipt) throws InsertElementException;
 
     /**
      * Delete a receipt
      *
-     * @param receipt
+     * @param receipt The receipt
      * @return ture if deleted
      */
     public boolean deleteReceipt(IReceipt receipt);
@@ -31,16 +31,16 @@ public interface IReceiptDAO {
     /**
      * find a Receipt
      *
-     * @param id
-     * @return the receipt
-     * @throws ElementNotFoundException
+     * @param id The id
+     * @return The receipt
+     * @throws ElementNotFoundException The exception
      */
     public IReceipt findReceipt(int id)  throws ElementNotFoundException;
 
     /**
      * update a Receipt
      *
-     * @param receipt
+     * @param receipt The receipt
      * @return true if update
      
      */

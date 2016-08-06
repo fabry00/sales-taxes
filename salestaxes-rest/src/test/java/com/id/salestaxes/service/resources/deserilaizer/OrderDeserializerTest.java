@@ -58,7 +58,7 @@ public class OrderDeserializerTest {
     /**
      * Test of deserialize method, of class OrderDeserializer.
      *
-     * @throws Exception
+     * @throws Exception The exception
      */
     @Test
     public void testDeserialize() throws Exception {
@@ -82,7 +82,7 @@ public class OrderDeserializerTest {
     /**
      * Test of deserialize method, of class OrderDeserializer.
      *
-     * @throws Exception
+     * @throws Exception The exception
      */
     @Test
     public void testDeserialize2() throws Exception {
@@ -106,7 +106,7 @@ public class OrderDeserializerTest {
     /**
      * Test of deserialize method, of class OrderDeserializer.
      *
-     * @throws Exception
+     * @throws Exception The exception
      */
     @Test
     public void testDeserialize3() throws Exception {

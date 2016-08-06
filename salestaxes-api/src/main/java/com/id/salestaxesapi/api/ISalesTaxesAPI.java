@@ -14,7 +14,7 @@ public interface ISalesTaxesAPI {
      *
      * @param order The order
      * @return the Receipt of the purchase
-     * @throws com.id.salestaxesapi.api.PurchaseException
+     * @throws PurchaseException The exception
      */
     public IReceipt purchase(IOrder order)  throws PurchaseException;
 
