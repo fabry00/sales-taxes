@@ -4,6 +4,7 @@ import com.id.salestaxesapi.TestCases;
 import com.id.salestaxesapi.api.IOrder;
 import com.id.salestaxesapi.api.IReceipt;
 import com.id.salestaxesapi.api.ITaxesCalculator;
+import com.id.salestaxesapi.api.PurchaseException;
 import com.id.salestaxesapi.obj.taxes.TaxesCalculator;
 import org.junit.After;
 import org.junit.AfterClass;
@@ -48,34 +49,55 @@ public class SalesTaxesAPITest {
      */
     @Test
     public void testPurchase() {
-        IOrder order = testCases.input1();
-        SalesTaxesAPI instance = new SalesTaxesAPI(calculator, null);
-        double expResult = TestCases.TOTAL_TAXES_INPUT1;
-        IReceipt result = instance.purchase(order);
+        try {
+            IOrder order = testCases.input1();
+            SalesTaxesAPI instance = new SalesTaxesAPI(calculator);
+            double expResult = TestCases.TOTAL_TAXES_INPUT1;
+            IReceipt result = instance.purchase(order);
 
-        printTest(1, order, result);
+            printTest(1, order, result);
 
-        assertEquals(expResult, result.getSalesTaxes(), 0);
+            assertEquals(expResult, result.getSalesTaxes(), 0);
+        } catch (PurchaseException ex) {
+            fail();
+        }
     }
 
     @Test
     public void testPurchase2() {
-        IOrder order = testCases.input2();
-        SalesTaxesAPI instance = new SalesTaxesAPI(calculator, null);
-        double expResult = TestCases.TOTAL_TAXES_INPUT2;
-        IReceipt result = instance.purchase(order);
-        printTest(2, order, result);
-        assertEquals(expResult, result.getSalesTaxes(), 0);
+        try {
+            IOrder order = testCases.input2();
+            SalesTaxesAPI instance = new SalesTaxesAPI(calculator);
+            double expResult = TestCases.TOTAL_TAXES_INPUT2;
+            IReceipt result = instance.purchase(order);
+            printTest(2, order, result);
+            assertEquals(expResult, result.getSalesTaxes(), 0);
+        } catch (PurchaseException ex) {
+            fail();
+        }
     }
 
     @Test
     public void testPurchase3() {
-        IOrder order = testCases.input3();
-        SalesTaxesAPI instance = new SalesTaxesAPI(calculator, null);
-        double expResult = TestCases.TOTAL_TAXES_INPUT3;
-        IReceipt result = instance.purchase(order);
-        printTest(3, order, result);
-        assertEquals(expResult, result.getSalesTaxes(), 0);
+        try {
+            IOrder order = testCases.input3();
+            SalesTaxesAPI instance = new SalesTaxesAPI(calculator);
+            double expResult = TestCases.TOTAL_TAXES_INPUT3;
+            IReceipt result = instance.purchase(order);
+            printTest(3, order, result);
+            assertEquals(expResult, result.getSalesTaxes(), 0);
+        } catch (PurchaseException ex) {
+            fail();
+        }
+    }
+    
+    @Test(expected = PurchaseException.class)
+    public void testPurchase4() throws PurchaseException {
+            IOrder order = testCases.input3();
+            SalesTaxesAPI instance = new SalesTaxesAPI(calculator);
+            instance.purchase(order);
+            instance.purchase(order);
+            fail("Expected PurchaseExcepiton");
     }
 
     private void printTest(int id, IOrder order, IReceipt result) {

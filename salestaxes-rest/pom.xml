@@ -11,18 +11,25 @@
              
     <groupId>com.id</groupId>
     <artifactId>salestaxes-rest</artifactId>
-    <version>1.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>salestaxes-rest</name>
-
+    
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
         <dropwizard.version>0.9.2</dropwizard.version>
         <mycompany.version>1.1-SNAPSHOT</mycompany.version>
         <mainClass>com.id.salestaxes.service.ServiceApp</mainClass>
+        <dependency.locations.enabled>false</dependency.locations.enabled>
     </properties>
+    
+    <parent>
+        <groupId>com.id.salestaxesapi</groupId>
+        <artifactId>sales-taxes</artifactId>
+        <version>1.1-SNAPSHOT</version>
+        <relativePath>..</relativePath>
+    </parent>
 
     <dependencyManagement>
         <dependencies>
@@ -147,6 +154,11 @@
                         </goals>
                     </execution>
                 </executions>
+            </plugin>
+            <plugin>
+                <groupId>com.heroku.sdk</groupId>
+                <artifactId>heroku-maven-plugin</artifactId>
+                <version>1.0.3</version>
             </plugin>
         </plugins>
         <testResources>
