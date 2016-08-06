@@ -11,11 +11,10 @@
              
     <groupId>com.id</groupId>
     <artifactId>salestaxes-rest</artifactId>
-    <version>1.1-SNAPSHOT</version>
     <packaging>jar</packaging>
 
     <name>salestaxes-rest</name>
-
+    
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
@@ -24,6 +23,13 @@
         <mainClass>com.id.salestaxes.service.ServiceApp</mainClass>
         <dependency.locations.enabled>false</dependency.locations.enabled>
     </properties>
+    
+    <parent>
+        <groupId>com.id.salestaxesapi</groupId>
+        <artifactId>sales-taxes</artifactId>
+        <version>1.1-SNAPSHOT</version>
+        <relativePath>..</relativePath>
+    </parent>
 
     <dependencyManagement>
         <dependencies>
