@@ -16,9 +16,9 @@ public interface IReceiptDAO {
      * insert a Receipt
      *
      * @param receipt
-     * @throws com.id.salestaxesapi.obj.persistent.ElementExistsException
+     * @throws com.id.salestaxesapi.obj.persistent.InsertElementException
      */
-    public void insertReceipt(IReceipt receipt) throws ElementExistsException;
+    public void insertReceipt(IReceipt receipt) throws InsertElementException;
 
     /**
      * Delete a receipt

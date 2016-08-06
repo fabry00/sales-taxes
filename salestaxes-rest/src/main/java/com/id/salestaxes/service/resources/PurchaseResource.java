@@ -10,9 +10,12 @@ import com.id.salestaxesapi.api.IReceipt;
 import com.id.salestaxesapi.api.ISalesTaxesAPI;
 import com.id.salestaxesapi.api.PurchaseException;
 import java.util.Set;
+import javax.validation.constraints.Min;
 import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.QueryParam;
 import javax.ws.rs.WebApplicationException;
 import javax.ws.rs.core.Response;
 import org.slf4j.Logger;
@@ -24,7 +27,8 @@ import org.slf4j.LoggerFactory;
 public class PurchaseResource {
 
     public static final String URL = "salestaxes";
-    public static final String GET_ORDERS_URL = "orders";
+    public static final String ORDERS_URL = "orders";
+    public static final String ORDER_URL = "order";
     public static final String PURCHASE_URL = "purchase";
 
     //SLF4J is provided with dropwizard
@@ -39,11 +43,24 @@ public class PurchaseResource {
 
     @GET
     @Timed
-    @Path("/" + GET_ORDERS_URL)
+    @Path("/" + ORDERS_URL)
     public Set<IReceipt> getOrders() {
         log.info("getOrders");
         Set<IReceipt> orders = this.salesTaxesAPI.getOrders();
         return orders;
+
+    }
+
+    @DELETE
+    @Timed
+    @Path("/" + ORDER_URL)
+    public Response deleteOrder(@QueryParam("id") @Min(0) Integer orderID) {
+        log.info("deleteOrder");
+        if(!this.salesTaxesAPI.delete(orderID)) {
+            return Response.status(Response.Status.INTERNAL_SERVER_ERROR).build();
+        }
+        
+        return Response.ok().build();
 
     }
 
@@ -64,7 +81,7 @@ public class PurchaseResource {
 
         log.error(message);
         throw new WebApplicationException(message,
-                                    Response.Status.EXPECTATION_FAILED);
+                Response.Status.EXPECTATION_FAILED);
 
     }
 }

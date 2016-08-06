@@ -5,9 +5,9 @@ package com.id.salestaxesapi.obj.persistent;
  *
  * @author Fabrizio Faustinoni
  */
-public class ElementExistsException extends Exception {
+public class InsertElementException extends Exception {
 
-    public ElementExistsException(String msg) {
+    public InsertElementException(String msg) {
         super(msg);
     }
 

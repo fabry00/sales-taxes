@@ -3,30 +3,34 @@ package com.id.salestaxesapi.obj.persistent;
 import com.id.salestaxesapi.api.IReceipt;
 import java.util.HashSet;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
- * Very simple and dummy DAO WARNING, this functionality has been added only to
+ * Very simple and dummy DAO.
+ * WARNING, this functionality has been added only to
  * complete the design, and, of course, could be improved a lot
  *
  * @author Fabrizio Faustinoni
  */
 public class InMemoryReceiptDAO implements IReceiptDAO {
 
-    private static Set<IReceipt> memoryDriver = memoryDriver = new HashSet<>();
+    private static final int MAX_ELEMENTS = 100;
+    private static Set<IReceipt> memoryDriver = ConcurrentHashMap.newKeySet();
 
     public InMemoryReceiptDAO() {
 
     }
 
     @Override
-    public void insertReceipt(IReceipt receipt) throws ElementExistsException {
-        System.out.println(memoryDriver.size());
+    public void insertReceipt(IReceipt receipt) throws InsertElementException {
+        if (memoryDriver.size() > MAX_ELEMENTS) {
+            throw new InsertElementException("Limit reached!! MAX: " + MAX_ELEMENTS);
+        }
         if (memoryDriver.contains(receipt)) {
-            throw new ElementExistsException("The Order with id:" + receipt.getID()
-                    + " lready exists");
+            throw new InsertElementException("The Order with id:" + receipt.getID()
+                    + " already exists");
         }
         memoryDriver.add(receipt);
-        System.out.println(memoryDriver.size());
     }
 
     @Override
@@ -46,14 +50,14 @@ public class InMemoryReceiptDAO implements IReceiptDAO {
                 return rec;
             }
         }
-
         throw new ElementNotFoundException("The Receipt with id   "
                 + id + " not found");
     }
 
     @Override
     public boolean updateReceipt(IReceipt receipt) {
-        throw new UnsupportedOperationException("Not supported yet.");
+        throw new UnsupportedOperationException("The Receipt is immutable and "
+                + "cannot be modified");
     }
 
     @Override

@@ -27,4 +27,11 @@ public interface ISalesTaxesAPI {
      * @return the receipts
      */
     public Set<IReceipt> getOrders();
+
+    /**
+     * Delete and order
+     * @param orderID the order id
+     * @return true if succeded
+     */
+    public boolean delete(Integer orderID);
 }
