@@ -1,5 +1,6 @@
 package com.id.salestaxesapi.api.impl;
 
+import com.id.salestaxesapi.api.PurchaseException;
 import com.id.salestaxesapi.api.IItem;
 import com.id.salestaxesapi.api.IOrder;
 import com.id.salestaxesapi.api.IReceipt;
@@ -9,10 +10,15 @@ import com.id.salestaxesapi.api.ITaxesCalculator;
 import com.id.salestaxesapi.obj.Price;
 import com.id.salestaxesapi.obj.Receipt;
 import com.id.salestaxesapi.obj.ReceiptItem;
-import com.id.salestaxesapi.obj.persistent.IPersistentEngine;
-import com.id.salestaxesapi.obj.persistent.ReciptDAO;
+import com.id.salestaxesapi.obj.persistent.DAOFactory;
+import com.id.salestaxesapi.obj.persistent.ElementExistsException;
+import com.id.salestaxesapi.obj.persistent.ElementNotFoundException;
+import com.id.salestaxesapi.obj.persistent.IReceiptDAO;
 import java.math.BigDecimal;
+import java.util.Set;
 import java.util.concurrent.atomic.AtomicReference;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * The implementation of
@@ -22,15 +28,18 @@ import java.util.concurrent.atomic.AtomicReference;
 public class SalesTaxesAPI implements ISalesTaxesAPI {
 
     private final ITaxesCalculator calculator;
-    private final IPersistentEngine engine;
 
-    public SalesTaxesAPI(ITaxesCalculator calcultor, IPersistentEngine engine) {
+    public SalesTaxesAPI(ITaxesCalculator calcultor) {
         this.calculator = calcultor;
-        this.engine = engine;
     }
 
     @Override
-    public IReceipt purchase(IOrder order) {
+    public IReceipt purchase(IOrder order) throws PurchaseException{
+        
+        if(checkOrderExists(order)) {
+            throw new PurchaseException("The order exists");
+        }
+        
         Receipt.Builder builder = new Receipt.Builder(order.getId())
                 .customer(order.getCustomer())
                 .date(order.getOrderDate());
@@ -69,21 +78,16 @@ public class SalesTaxesAPI implements ISalesTaxesAPI {
     }
 
     /**
-     * Return all the orders stored. 
-     * WARNING: this is a very very simple and
+     * Return all the orders stored. WARNING: this is a very very simple and
      * dummy functionality added just to complete the design.
      *
      * @return all the orders in string format
      */
     @Override
-    public String getOrders() {
-        if (engine != null) {
-            // Only if there is a valid engine
-            // This shuld be an interface
-            ReciptDAO dao = new ReciptDAO(engine);
-            return dao.findAll();
-        }
-        return "";
+    public Set<IReceipt> getOrders() {
+        DAOFactory factory = new DAOFactory();
+        IReceiptDAO dao = factory.getReceiptDAO();
+        return dao.findAll();
     }
 
     private IReceiptItem getReceiptItem(IItem item, Integer nOfItems) {
@@ -101,19 +105,35 @@ public class SalesTaxesAPI implements ISalesTaxesAPI {
         return taxes;
     }
 
+    private boolean checkOrderExists(IOrder order) {
+        DAOFactory factory = new DAOFactory();
+        IReceiptDAO dao = factory.getReceiptDAO();
+        try {
+            dao.findReceipt(order.getId());
+            return true;
+        } catch (ElementNotFoundException ex) {
+            Logger.getLogger(SalesTaxesAPI.class.getName())
+                    .log(Level.SEVERE, "Orer exists", ex);
+        }
+        return false;
+
+    }
+
     /**
-     * Persiste the Reeipt
-     *
-     * This part could be improved!!!!
+     * Persiste the Reeipt 
+     * WARNING, this functionality has been added only to
+     * complete the design, and, of course, could be improved a lot
      *
      * @param receipt
      */
     private void persisteReicpit(IReceipt receipt) {
-        if (engine != null) {
-            // Persiste only if there is a valid engine
-            // This shuld be an interface
-            ReciptDAO dao = new ReciptDAO(engine);
-            dao.insertRecipt(receipt);
+        DAOFactory factory = new DAOFactory();
+        IReceiptDAO dao = factory.getReceiptDAO();
+        try {
+            dao.insertReceipt(receipt);
+        } catch (ElementExistsException ex) {
+            Logger.getLogger(SalesTaxesAPI.class.getName())
+                    .log(Level.SEVERE, "Error insert", ex);
         }
     }
 

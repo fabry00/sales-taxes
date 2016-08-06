@@ -1,5 +1,7 @@
 package com.id.salestaxesapi.api;
 
+import java.util.Set;
+
 /**
  * Public API
  *
@@ -12,14 +14,17 @@ public interface ISalesTaxesAPI {
      *
      * @param order The order
      * @return the Receipt of the purchase
+     * @throws com.id.salestaxesapi.api.PurchaseException
      */
-    public IReceipt purchase(IOrder order);
+    public IReceipt purchase(IOrder order)  throws PurchaseException;
 
     /**
      * Return all the orders stored.
-     * WARNING: this is a very very simple and dummy
-     * functionality added just to complete the design.
-     * @return all the orders in string format
+     * WARNING, this functionality has been added only
+     * to complete the design, and, of course, could
+     * be improved a lot
+     * 
+     * @return the receipts
      */
-    public String getOrders();
+    public Set<IReceipt> getOrders();
 }

@@ -49,7 +49,7 @@ public class SalesTaxesAPITest {
     @Test
     public void testPurchase() {
         IOrder order = testCases.input1();
-        SalesTaxesAPI instance = new SalesTaxesAPI(calculator, null);
+        SalesTaxesAPI instance = new SalesTaxesAPI(calculator);
         double expResult = TestCases.TOTAL_TAXES_INPUT1;
         IReceipt result = instance.purchase(order);
 
@@ -61,7 +61,7 @@ public class SalesTaxesAPITest {
     @Test
     public void testPurchase2() {
         IOrder order = testCases.input2();
-        SalesTaxesAPI instance = new SalesTaxesAPI(calculator, null);
+        SalesTaxesAPI instance = new SalesTaxesAPI(calculator);
         double expResult = TestCases.TOTAL_TAXES_INPUT2;
         IReceipt result = instance.purchase(order);
         printTest(2, order, result);
@@ -71,7 +71,7 @@ public class SalesTaxesAPITest {
     @Test
     public void testPurchase3() {
         IOrder order = testCases.input3();
-        SalesTaxesAPI instance = new SalesTaxesAPI(calculator, null);
+        SalesTaxesAPI instance = new SalesTaxesAPI(calculator);
         double expResult = TestCases.TOTAL_TAXES_INPUT3;
         IReceipt result = instance.purchase(order);
         printTest(3, order, result);
