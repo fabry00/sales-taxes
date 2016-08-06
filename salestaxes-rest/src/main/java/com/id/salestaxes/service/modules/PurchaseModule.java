@@ -1,4 +1,4 @@
-package com.id.salestaxes.service.resources;
+package com.id.salestaxes.service.modules;
 
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.id.salestaxes.service.resources.deserilaizer.OrderDeserializer;
