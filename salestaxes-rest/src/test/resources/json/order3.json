@@ -1,0 +1,41 @@
+{
+    "id": "157",
+    "date": "2016-08-04 15:28:36",
+    "customer": {
+        "name": "Mario rossi"
+    },
+    "goods": [
+        {
+            "name": "imported bottle of perfume",
+            "category": "OTHER",
+            "imported": true,
+            "price": {
+                "value": 27.99
+            }
+        },
+        {
+            "name": "bottle of perfume",
+            "category": "OTHER",
+            "imported": false,
+            "price": {
+                "value": 18.99
+            }
+        },
+        {
+            "name": "packet of headache pills",
+            "category": "MEDICAL",
+            "imported": false,
+            "price": {
+                "value": 9.75
+            }
+        },
+        {
+            "name": "box of imported chocolates",
+            "category": "FOOD",
+            "imported": true,
+            "price": {
+                "value": 11.25
+            }
+        }
+    ]
+}

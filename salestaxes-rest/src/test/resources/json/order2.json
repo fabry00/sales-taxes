@@ -1,0 +1,25 @@
+{
+    "id": "515",
+    "date": "2016-08-04 15:28:36",
+    "customer": {
+        "name": "Mario rossi"
+    },
+    "goods": [
+        {
+            "name": "imported box of chocolates",
+            "category": "FOOD",
+            "imported": true,
+            "price": {
+                "value": 10.00
+            }
+        },
+        {
+            "name": "imported bottle of perfume",
+            "category": "OTHER",
+            "imported": true,
+            "price": {
+                "value": 47.50
+            }
+        }
+    ]
+}
